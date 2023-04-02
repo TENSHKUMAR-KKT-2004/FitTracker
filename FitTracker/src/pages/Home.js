@@ -2,15 +2,16 @@ import React,{useEffect,useState} from 'react'
 
 // components
 import WorkoutDetails from '../components/WorkoutDetails'
+import WorkoutForm from '../components/WorkoutForm'
 
 const Home = () => {
   const [workouts,setWorkouts] = useState(null)
   useEffect(()=>{
     const fetchWorkouts = async()=>{
-      const responce = await fetch('/api/workouts') 
-      const json = await responce.json()
+      const response = await fetch('/api/workouts') 
+      const json = await response.json()
 
-      if(responce.ok){
+      if(response.ok){
         setWorkouts(json)
       }
     }
@@ -18,12 +19,12 @@ const Home = () => {
   },[])
   return (
     <div className="home">
-      <h2>Home</h2>
       <div className="workouts">
         {workouts && workouts.map((workout)=>(
-          <WorkoutDetails ket={workout._id} workout={workout}/>
+          <WorkoutDetails key={workout._id} workout={workout}/>
           ))}
       </div>
+      <WorkoutForm />
     </div>
   )
 }
