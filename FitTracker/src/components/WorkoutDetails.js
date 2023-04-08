@@ -1,6 +1,8 @@
 import React from 'react'
 import { useWorkoutsContext } from '../hooks/useWorkoutContext'
 
+import moment from 'moment'
+
 const WorkoutDetails = ({workout}) => {
     const {dispatch} = useWorkoutsContext()
     const handleClick = async ()=>{
@@ -17,8 +19,8 @@ const WorkoutDetails = ({workout}) => {
         <h4>{workout.title}</h4>
         <p><strong>Load (KG): </strong>{workout.load}</p>
         <p><strong>Reps: </strong>{workout.reps}</p>
-        <p>{workout.createdAt}</p>
-        <span onClick={handleClick}>Delete</span>
+        <p>{moment(new Date(workout.createdAt)).fromNow()}</p>
+        <span className='material-symbols-outlined' onClick={handleClick}>Delete</span>
     </div> );
 }
  
