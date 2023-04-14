@@ -6,6 +6,8 @@ const mongoose = require('mongoose')
 const app = express()
 
 const workoutsRoute = require('./routes/workoutsRoute')
+const userRoute = require('./routes/userRoute')
+
 
 // global middleware
 app.use(express.json())
@@ -24,3 +26,9 @@ mongoose.connect(DBURI)
 
 // routes 
 app.use('/api/workouts', workoutsRoute)
+
+app.use('/api/user',userRoute)
+
+app.use('',(req,res)=>{
+    res.status(404).send('URL not found ! :(')
+})
