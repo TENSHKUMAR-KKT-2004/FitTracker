@@ -29,6 +29,7 @@ userSchema.statics.signup = async function(email,password){
     if(!validator.isStrongPassword(password)){
         throw Error('**** is not Strong Password') 
     }
+
     // check if the email already exist
     const exist = await this.findOne({email})
     if(exist){
@@ -39,9 +40,26 @@ userSchema.statics.signup = async function(email,password){
     const salt = await bcrypt.genSalt(10)
     // hash the pass
     const hash = await bcrypt.hash(password,salt)
-
     // store the hashed pass and email
     const user = this.create({email,password:hash})
+
+    return user
+}
+
+userSchema.statics.login = async function(email,password){
+    if(!email || !password){
+        throw Error('All fields must be filled')
+    }
+
+    const user = await this.findOne({email})
+    if(!user){
+        throw Error('Invalid email')
+    }
+
+    const matchPassword = await bcrypt.compare(password,user.password)
+    if(!matchPassword){
+        throw Error('Invalid password')
+    }
 
     return user
 }
