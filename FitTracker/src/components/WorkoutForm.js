@@ -36,7 +36,6 @@ const WorkoutForm = () => {
         }
 
         if(response.ok){
-            console.log('succesfully added new workout',json)
             setTitle('')
             setLoad('')
             setReps('')
