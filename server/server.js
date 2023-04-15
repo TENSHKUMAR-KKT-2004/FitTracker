@@ -2,6 +2,7 @@ require('dotenv').config()
 const { urlencoded } = require('express')
 const express = require('express')
 const mongoose = require('mongoose')
+const cors = require('cors')
 const path = require('path')
 
 // create server
@@ -11,6 +12,7 @@ const workoutsRoute = require('./routes/workoutsRoute')
 const userRoute = require('./routes/userRoute')
 
 // global middleware
+app.use(cors())
 app.use(express.json())
 app.use(urlencoded({ extended: true }))
 
