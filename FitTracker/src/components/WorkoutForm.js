@@ -11,9 +11,11 @@ const WorkoutForm = () => {
     const [reps,setReps] = useState("")
     const [error,setError] = useState(null)
     const [emptyFields,setEmptyFields] = useState([])
+    const [isPending,setPending] = useState(false)
 
     const handleSubmit =async (e) => {
         e.preventDefault()
+        setPending(true)
         if(!user){
             setError('You must be Logged in')
             return
@@ -33,6 +35,7 @@ const WorkoutForm = () => {
         if(!response.ok){
             setEmptyFields(json.emptyFields)
             setError(json.error)
+            setPending(false)
         }
 
         if(response.ok){
@@ -42,6 +45,7 @@ const WorkoutForm = () => {
             setEmptyFields([])
             setError(null)
             dispatch({type:'CREATE_WORKOUT',payload:json})
+            setPending(false)
         }
     }
     return ( 
@@ -68,7 +72,7 @@ const WorkoutForm = () => {
         value={reps}
         className={emptyFields.includes('reps') ? 'error' : ''}
         />
-        <button>Add Workout</button>
+        {isPending ? <button disabled>Loading...</button>:<button>Add Workout</button>}
         {error && <div className="error">{error}</div> }
     </form>
  );
