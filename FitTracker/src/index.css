@@ -128,3 +128,16 @@ form.signup, form.login {
   background: #fff;
   border-radius: 4px;
 }
+
+/* password field */
+.password-field {
+  position: relative;
+}
+
+body .password-field #toggler {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}

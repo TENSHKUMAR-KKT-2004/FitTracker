@@ -32,13 +32,13 @@ mongoose.connect(DBURI)
 // routes 
 app.use('/api/workouts', workoutsRoute)
 
-app.use('/api/user',userRoute)
+app.use('/api/user', userRoute)
 
 // Route all requests to the React app's index.html file
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'build', 'index.html'));
 })
 
-app.use('',(req,res)=>{
+app.use('', (req, res) => {
     res.status(404).send('URL not found !')
 })
